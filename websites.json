@@ -12,7 +12,7 @@
 
 {
 "name":"Scratch",
-"subject":"Coding",
+"subject":["Coding"],
 "grade":["Grade 3","Grade 4","Grade 5"],
 "description":"Create games and animations.",
 "link":"https://scratch.mit.edu",
@@ -23,7 +23,7 @@
 
 {
 "name":"National Geographic Kids",
-"subject":"Science",
+"subject":["Science"],
 "grade":["Grade 2","Grade 3","Grade 4"],
 "description":"Discover animals and nature.",
 "link":"https://kids.nationalgeographic.com",
@@ -34,7 +34,7 @@
 
 {
 "name":"Storyline Online",
-"subject":"Reading",
+"subject":["Reading"],
 "grade":["KG","Grade 1","Grade 2"],
 "description":"Enjoy stories read aloud.",
 "link":"https://storylineonline.net",
@@ -45,7 +45,7 @@
 
 {
 "name":"Code.org",
-"subject":"Coding",
+"subject":["Coding"],
 "grade":["Grade 3","Grade 4","Grade 5"],
 "description":"Learn coding through fun activities.",
 "link":"https://code.org",
