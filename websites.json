@@ -1,9 +1,9 @@
 [
 {
 "name":"Kiddo Worksheets",
-"subject":"All Subjects",
+"subject":["English", "Math", "Art"],
 "grade":["Preschool","KG","Primary"],
-"description":"Fun learning for math and reading.",
+"description":"Free printable worksheets for kids",
 "link":"https://www.kiddoworksheets.com/",
 "icon":"📚",
 "thumbnail":"https://res.cloudinary.com/dbelkc1um/image/upload/v1782225283/Screenshot_2026-06-23_9.23.07_PM_eddoo9.png",
