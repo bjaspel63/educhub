@@ -27,6 +27,21 @@ header p{
     margin-bottom:20px;
 }
 
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg fill='%23333' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.5 7l4.5 5 4.5-5H5.5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 35px;
+}
+
+/* move controls slightly left */
+.controls {
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
 /* Controls */
 
 .controls{
