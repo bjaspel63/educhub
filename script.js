@@ -4,7 +4,6 @@ const container = document.getElementById("container");
 const search = document.getElementById("search");
 const category = document.getElementById("category");
 const themeBtn = document.getElementById("themeBtn");
-const favoritesOnly = document.getElementById("favoritesOnly");
 
 fetch("websites.json")
     .then(response => response.json())
@@ -55,9 +54,7 @@ function display(sites) {
         </div>
         `;
     });
-
 }
-
 
 function toggleFavorite(name) {
 
@@ -65,19 +62,14 @@ function toggleFavorite(name) {
 
     if (favorites.includes(name)) {
         favorites = favorites.filter(x => x !== name);
-    }
-    else {
+    } else {
         favorites.push(name);
     }
 
-    localStorage.setItem(
-        "favorites",
-        JSON.stringify(favorites)
-    );
+    localStorage.setItem("favorites", JSON.stringify(favorites));
 
     applyFilters();
 }
-
 
 function applyFilters() {
 
@@ -92,31 +84,21 @@ function applyFilters() {
             site.subject.toLowerCase().includes(text);
 
         let matchesCategory =
-            cat === "All" || site.subject === cat;
+            cat === "All" ||
+            site.subject === cat ||
+            (cat === "Favorites" && favorites.includes(site.name));
 
-        let matchesFavorite =
-            !favoritesOnly.checked ||
-            favorites.includes(site.name);
-
-        return matchesSearch &&
-               matchesCategory &&
-               matchesFavorite;
-
+        return matchesSearch && matchesCategory;
     });
 
     display(filtered);
 }
-
 
 // Search
 search.addEventListener("input", applyFilters);
 
 // Category
 category.addEventListener("change", applyFilters);
-
-// Favorites Only
-favoritesOnly.addEventListener("change", applyFilters);
-
 
 // Dark Mode
 themeBtn.addEventListener("click", () => {
@@ -129,7 +111,6 @@ themeBtn.addEventListener("click", () => {
     );
 
 });
-
 
 // Restore Theme
 if (localStorage.getItem("theme") === "true") {
