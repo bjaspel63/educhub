@@ -37,8 +37,6 @@ header p {
     padding-left: 20px;
 }
 
-/* Inputs / Select / Buttons */
-
 input,
 select,
 button {
@@ -51,8 +49,6 @@ button {
 input {
     min-width: 250px;
 }
-
-/* Dropdown fix (no overlap + clean arrow) */
 
 select {
     appearance: none;
@@ -67,8 +63,6 @@ select {
     padding-right: 40px;
     min-width: 180px;
 }
-
-/* Buttons */
 
 button {
     cursor: pointer;
@@ -120,38 +114,41 @@ button:hover {
     display: flex;
     flex-direction: column;
     flex: 1;
-    gap: 10px;
+    gap: 8px;
 }
 
 .content h2 {
-    margin-top: 0;
+    margin: 0;
 }
 
 .content p {
     color: #555;
     line-height: 1.5;
+    flex-grow: 1;
+    margin: 0;
 }
 
-/* ================= SUBJECT BADGES ================= */
+/* ================= SUBJECT PILLS ================= */
 
-.subjects{
-    min-height:50px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:8px;
+.subjects {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: flex-start;
 }
 
-.subject-pill{
-    background:#edf2f7;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:14px;
-    white-space:nowrap;
-    font-weight:600;
-}
+.subject-pill {
+    display: inline-flex;
+    align-items: center;
 
-.dark .subject-pill{
-    background:#475569;
+    background: #edf2f7;
+    padding: 4px 12px;
+    border-radius: 20px;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+    white-space: nowrap;
 }
 
 /* ================= FAVORITE STAR ================= */
@@ -170,10 +167,11 @@ button:hover {
 .visit-btn {
     margin-top: auto;
     width: 100%;
+    padding: 14px;
+
     background: #4CAF50;
     color: white;
     font-weight: bold;
-    margin-bottom: 12px;
 }
 
 .visit-btn:hover {
@@ -195,7 +193,7 @@ button:hover {
     color: #d1d5db;
 }
 
-.dark .grade {
+.dark .subject-pill {
     background: #475569;
 }
 
@@ -208,6 +206,14 @@ button:hover {
 .dark button {
     background: #64748b;
     color: white;
+}
+
+.dark .visit-btn {
+    background: #16a34a;
+}
+
+.dark .visit-btn:hover {
+    background: #15803d;
 }
 
 /* ================= FOOTER ================= */
@@ -223,22 +229,6 @@ footer {
 
 .dark footer {
     background: #334155;
-}
-
-.grades {
-    min-height: 50px;   /* keeps space even if few pills */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    align-content: flex-start;
-}
-
-.grade {
-    background: #edf2f7;
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 14px;
-    white-space: nowrap;
 }
 
 /* ================= RESPONSIVE ================= */
