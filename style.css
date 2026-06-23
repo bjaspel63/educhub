@@ -132,15 +132,26 @@ button:hover {
     line-height: 1.5;
 }
 
-/* ================= GRADE BADGES ================= */
+/* ================= SUBJECT BADGES ================= */
 
-.grade {
-    background: #edf2f7;
-    padding: 5px 12px;
-    border-radius: 20px;
-    display: inline-block;
-    margin: 5px 5px 0 0;
-    font-size: 14px;
+.subjects{
+    min-height:50px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+}
+
+.subject-pill{
+    background:#edf2f7;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:14px;
+    white-space:nowrap;
+    font-weight:600;
+}
+
+.dark .subject-pill{
+    background:#475569;
 }
 
 /* ================= FAVORITE STAR ================= */
