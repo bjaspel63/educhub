@@ -60,10 +60,10 @@ function display(sites) {
 
                 <p>${site.description}</p>
 
-                <div class="grades">
-                    ${site.grade
-                        .map(g => `<span class="grade">${g}</span>`)
-                        .join("")}
+                <div class="subjects">
+                    ${site.subject
+                    .map(s => `<span class="subject-pill">${s}</span>`)
+                    .join("")}
                 </div>
 
                 <button class="visit-btn"
