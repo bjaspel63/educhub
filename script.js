@@ -1,147 +1,137 @@
-let websites=[];
+let websites = [];
+
+const container = document.getElementById("container");
+const search = document.getElementById("search");
+const category = document.getElementById("category");
+const themeBtn = document.getElementById("themeBtn");
+const favoritesOnly = document.getElementById("favoritesOnly");
 
 fetch("websites.json")
-.then(r=>r.json())
-.then(data=>{
-    websites=data;
-    display(websites);
-    displayRecommended();
-});
+    .then(response => response.json())
+    .then(data => {
+        websites = data;
+        applyFilters();
+    });
 
-const container=document.getElementById("container");
+function display(sites) {
 
-function display(data){
+    container.innerHTML = "";
 
-container.innerHTML="";
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-data.forEach(site=>{
+    sites.forEach(site => {
 
-let favs=JSON.parse(localStorage.getItem("favorites"))||[];
+        container.innerHTML += `
+        <div class="card" style="border-top:10px solid ${site.color}">
 
-container.innerHTML+=`
-<div class="card" style="border-top:10px solid ${site.color}">
-    
-<div class="favorite"
-onclick="toggleFavorite('${site.name}')">
-${favs.includes(site.name)?"⭐":"☆"}
-</div>
+            <div class="favorite"
+                 onclick="toggleFavorite('${site.name}')">
+                ${favorites.includes(site.name) ? "⭐" : "☆"}
+            </div>
 
-<img class="thumbnail" src="${site.thumbnail}">
+            <img class="thumbnail"
+                 src="${site.thumbnail}"
+                 alt="${site.name}">
 
-<div class="content">
+            <div class="content">
 
-<h2>${site.icon} ${site.name}</h2>
+                <h2>${site.icon} ${site.name}</h2>
 
-<p>${site.description}</p>
+                <p>${site.description}</p>
 
-<div>
-${site.grade.map(g=>`<span class="grade">${g}</span>`).join("")}
-</div>
+                <div class="grades">
+                    ${site.grade
+                        .map(g => `<span class="grade">${g}</span>`)
+                        .join("")}
+                </div>
 
-${site.recommended ? "<div class='teacher'>❤️ Teacher Recommended</div>" : ""}
+                <button class="visit-btn"
+                    onclick="window.open('${site.link}','_blank')">
+                    🚀 Visit Website
+                </button>
 
-<div class="actions">
+            </div>
 
-<button onclick="speak('${site.description}')">
-🔊 Listen
-</button>
-
-<button onclick="window.open('${site.link}')">
-🚀 Visit
-</button>
-
-</div>
-
-</div>
-
-</div>
-`;
-});
-}
-
-function speak(text){
-let speech=new SpeechSynthesisUtterance(text);
-speech.lang="en-US";
-speech.rate=1;
-speechSynthesis.speak(speech);
-}
-
-function toggleFavorite(name){
-
-let favs=JSON.parse(localStorage.getItem("favorites"))||[];
-
-if(favs.includes(name))
-favs=favs.filter(x=>x!==name);
-else
-favs.push(name);
-
-localStorage.setItem("favorites",JSON.stringify(favs));
-
-display(websites);
-}
-
-search.oninput=filter;
-category.onchange=filter;
-
-function filter(){
-
-let text=search.value.toLowerCase();
-let cat=category.value;
-
-let filtered=websites.filter(site=>
-
-(site.name.toLowerCase().includes(text) ||
-site.subject.toLowerCase().includes(text))
-
-&&
-
-(cat==="All" || site.subject===cat)
-
-);
-
-display(filtered);
+        </div>
+        `;
+    });
 
 }
 
-themeBtn.onclick=()=>{
 
-document.body.classList.toggle("dark");
+function toggleFavorite(name) {
 
-localStorage.setItem(
-"theme",
-document.body.classList.contains("dark")
-);
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-};
+    if (favorites.includes(name)) {
+        favorites = favorites.filter(x => x !== name);
+    }
+    else {
+        favorites.push(name);
+    }
 
-if(localStorage.getItem("theme")==="true")
-document.body.classList.add("dark");
+    localStorage.setItem(
+        "favorites",
+        JSON.stringify(favorites)
+    );
 
-surpriseBtn.onclick=()=>{
+    applyFilters();
+}
 
-let random=websites[Math.floor(Math.random()*websites.length)];
 
-window.open(random.link);
+function applyFilters() {
 
-};
+    let text = search.value.toLowerCase();
+    let cat = category.value;
+    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-function displayRecommended(){
+    let filtered = websites.filter(site => {
 
-recommended.innerHTML="";
+        let matchesSearch =
+            site.name.toLowerCase().includes(text) ||
+            site.subject.toLowerCase().includes(text);
 
-websites
-.filter(site=>site.recommended)
-.forEach(site=>{
+        let matchesCategory =
+            cat === "All" || site.subject === cat;
 
-recommended.innerHTML+=`
-<div class="card" style="min-width:250px;border-top:10px solid ${site.color}">
-<img class="thumbnail" src="${site.thumbnail}">
-<div class="content">
-<h3>${site.icon} ${site.name}</h3>
-</div>
-</div>
-`;
+        let matchesFavorite =
+            !favoritesOnly.checked ||
+            favorites.includes(site.name);
+
+        return matchesSearch &&
+               matchesCategory &&
+               matchesFavorite;
+
+    });
+
+    display(filtered);
+}
+
+
+// Search
+search.addEventListener("input", applyFilters);
+
+// Category
+category.addEventListener("change", applyFilters);
+
+// Favorites Only
+favoritesOnly.addEventListener("change", applyFilters);
+
+
+// Dark Mode
+themeBtn.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark");
+
+    localStorage.setItem(
+        "theme",
+        document.body.classList.contains("dark")
+    );
 
 });
 
+
+// Restore Theme
+if (localStorage.getItem("theme") === "true") {
+    document.body.classList.add("dark");
 }
