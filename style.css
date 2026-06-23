@@ -1,116 +1,194 @@
 *{
-box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-font-family:Comic Sans MS,sans-serif;
-margin:0;
-background:#e0f7ff;
-transition:.3s;
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#e0f7ff;
+    color:#333;
+    transition:0.3s;
 }
+
+/* Header */
 
 header{
-background:linear-gradient(to right,#ffb703,#fb8500);
-color:white;
-padding:20px;
-text-align:center;
+    background:linear-gradient(to right,#ffb703,#fb8500);
+    color:white;
+    text-align:center;
+    padding:20px;
 }
 
-.toolbar{
-display:flex;
-flex-wrap:wrap;
-gap:10px;
-justify-content:center;
-margin-top:20px;
+header h1{
+    margin-bottom:10px;
 }
 
-input,select,button{
-padding:12px;
-border:none;
-border-radius:15px;
-font-size:16px;
+header p{
+    margin-bottom:20px;
+}
+
+/* Controls */
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:10px;
+}
+
+input,
+select,
+button{
+    padding:12px 16px;
+    border:none;
+    border-radius:15px;
+    font-size:16px;
+}
+
+input{
+    min-width:250px;
 }
 
 button{
-cursor:pointer;
+    cursor:pointer;
+    transition:.2s;
 }
 
+button:hover{
+    opacity:.9;
+}
+
+/* Favorites Filter */
+
+.favorites-filter{
+    margin-top:15px;
+}
+
+.favorites-filter label{
+    font-size:16px;
+}
+
+/* Website Cards */
+
 .container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:25px;
-padding:30px;
+    padding:30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
 }
 
 .card{
-background:white;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 5px 15px rgba(0,0,0,.15);
-transition:.3s;
-position:relative;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+    position:relative;
+    transition:.3s;
 }
 
 .card:hover{
-transform:translateY(-8px);
+    transform:translateY(-8px);
 }
 
 .thumbnail{
-width:100%;
-height:180px;
-object-fit:cover;
+    width:100%;
+    height:180px;
+    object-fit:cover;
 }
 
 .content{
-padding:20px;
+    padding:20px;
 }
+
+.content h2{
+    margin-top:0;
+}
+
+.content p{
+    color:#555;
+    line-height:1.5;
+}
+
+/* Grade badges */
 
 .grade{
-background:#edf2f7;
-padding:5px 10px;
-border-radius:20px;
-display:inline-block;
-margin:4px;
-font-size:14px;
+    background:#edf2f7;
+    padding:5px 12px;
+    border-radius:20px;
+    display:inline-block;
+    margin:5px 5px 0 0;
+    font-size:14px;
 }
 
-.teacher{
-color:red;
-font-weight:bold;
-}
-
-.actions{
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-margin-top:15px;
-}
-
-.actions button{
-flex:1;
-}
+/* Favorite star */
 
 .favorite{
-position:absolute;
-top:15px;
-right:15px;
-font-size:25px;
-cursor:pointer;
+    position:absolute;
+    top:15px;
+    right:15px;
+    font-size:28px;
+    cursor:pointer;
+    user-select:none;
 }
 
+/* Visit button */
+
+.visit-btn{
+    margin-top:20px;
+    width:100%;
+    background:#4CAF50;
+    color:white;
+    font-weight:bold;
+}
+
+.visit-btn:hover{
+    background:#43a047;
+}
+
+/* Dark mode */
+
 .dark{
-background:#1e293b;
-color:white;
+    background:#1e293b;
+    color:white;
 }
 
 .dark .card{
-background:#334155;
-color:white;
+    background:#334155;
+    color:white;
 }
 
-#recommended{
-padding:20px;
-display:flex;
-gap:20px;
-overflow:auto;
+.dark .content p{
+    color:#d1d5db;
+}
+
+.dark .grade{
+    background:#475569;
+}
+
+.dark input,
+.dark select{
+    background:#475569;
+    color:white;
+}
+
+.dark button{
+    background:#64748b;
+    color:white;
+}
+
+/* Responsive */
+
+@media (max-width:768px){
+
+    .controls{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    input,
+    select,
+    button{
+        width:90%;
+    }
+
 }
