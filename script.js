@@ -12,20 +12,42 @@ fetch("websites.json")
         applyFilters();
     });
 
+function getFavorites() {
+    return JSON.parse(localStorage.getItem("favorites")) || [];
+}
+
 function display(sites) {
 
     container.innerHTML = "";
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const favorites = getFavorites();
+
+    // ⭐ Show empty state for Favorites filter
+    if (category.value === "Favorites" && sites.length === 0) {
+        container.innerHTML = `
+            <div style="
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 50px;
+                font-size: 20px;
+                color: gray;
+            ">
+                ⭐ You don’t have any favorites yet!
+            </div>
+        `;
+        return;
+    }
 
     sites.forEach(site => {
+
+        const isFav = favorites.includes(site.name);
 
         container.innerHTML += `
         <div class="card" style="border-top:10px solid ${site.color}">
 
             <div class="favorite"
-                 onclick="toggleFavorite('${site.name}')">
-                ${favorites.includes(site.name) ? "⭐" : "☆"}
+                 onclick="toggleFavorite('${site.name.replace(/'/g, "\\'")}')">
+                ${isFav ? "⭐" : "☆"}
             </div>
 
             <img class="thumbnail"
@@ -58,7 +80,7 @@ function display(sites) {
 
 function toggleFavorite(name) {
 
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let favorites = getFavorites();
 
     if (favorites.includes(name)) {
         favorites = favorites.filter(x => x !== name);
@@ -75,15 +97,15 @@ function applyFilters() {
 
     let text = search.value.toLowerCase();
     let cat = category.value;
-    let favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    let favorites = getFavorites();
 
     let filtered = websites.filter(site => {
 
-        let matchesSearch =
+        const matchesSearch =
             site.name.toLowerCase().includes(text) ||
             site.subject.toLowerCase().includes(text);
 
-        let matchesCategory =
+        const matchesCategory =
             cat === "All" ||
             site.subject === cat ||
             (cat === "Favorites" && favorites.includes(site.name));
@@ -109,7 +131,6 @@ themeBtn.addEventListener("click", () => {
         "theme",
         document.body.classList.contains("dark")
     );
-
 });
 
 // Restore Theme
