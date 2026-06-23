@@ -222,6 +222,20 @@ button:hover{
     }
 
 }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    background: #ffb703;
+    color: white;
+    font-size: 14px;
+}
+
+.dark footer {
+    background: #334155;
+}
+
 /* Responsive */
 
 @media (max-width:768px){
