@@ -116,6 +116,21 @@ button:hover{
     line-height:1.5;
 }
 
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.visit-btn {
+    margin-top: auto;
+}
+
 /* Grade badges */
 
 .grade{
