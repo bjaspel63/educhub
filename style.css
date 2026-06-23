@@ -214,6 +214,22 @@ footer {
     background: #334155;
 }
 
+.grades {
+    min-height: 50px;   /* keeps space even if few pills */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-content: flex-start;
+}
+
+.grade {
+    background: #edf2f7;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media (max-width: 768px) {
