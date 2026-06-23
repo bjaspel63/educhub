@@ -101,13 +101,15 @@ function applyFilters() {
 
     let filtered = websites.filter(site => {
 
-        const matchesSearch =
-            site.name.toLowerCase().includes(text) ||
-            site.subject.toLowerCase().includes(text);
+    const matchesSearch =
+        site.name.toLowerCase().includes(text) ||
+        site.subject.some(subject =>
+            subject.toLowerCase().includes(text)
+        );
 
         const matchesCategory =
-            cat === "All" ||
-            site.subject === cat ||
+             cat === "All" ||
+            (site.subject && site.subject.includes(cat)) ||
             (cat === "Favorites" && favorites.includes(site.name));
 
         return matchesSearch && matchesCategory;
