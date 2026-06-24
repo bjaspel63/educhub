@@ -153,13 +153,41 @@ button:hover {
 
 /* ================= FAVORITE STAR ================= */
 
+/* ================= FAVORITE STAR ================= */
+
 .favorite {
     position: absolute;
     top: 15px;
     right: 15px;
-    font-size: 28px;
+
+    font-size: 30px;
+    line-height: 1;
+
     cursor: pointer;
     user-select: none;
+
+    color: #d1d5db;          
+    transition: transform .2s, color .2s;
+}
+
+.favorite.active {
+    color: #ffd700;          
+}
+
+.favorite:hover {
+    transform: scale(1.15);
+}
+
+.favorite:active {
+    transform: scale(1.3);
+}
+
+.dark .favorite {
+    color: #64748b;
+}
+
+.dark .favorite.active {
+    color: #ffd700;
 }
 
 /* ================= VISIT BUTTON ================= */
