@@ -45,10 +45,11 @@ function display(sites) {
         container.innerHTML += `
         <div class="card" style="border-top:10px solid ${site.color}">
 
-            <div class="favorite"
-                 onclick="toggleFavorite('${site.name.replace(/'/g, "\\'")}')">
-                ${isFav ? "⭐" : "☆"}
-            </div>
+            <div class="favorite ${isFav ? "active" : ""}"
+             title="${isFav ? "Remove from Favorites" : "Add to Favorites"}"
+             onclick="toggleFavorite('${site.name.replace(/'/g, "\\'")}')">
+            ★
+        </div>
 
             <img class="thumbnail"
                  src="${site.thumbnail}"
